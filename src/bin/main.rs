@@ -1,7 +1,14 @@
 use level_coin::pow::validator;
+use std::time::Instant;
 
 fn main() {
-    validator::find(7, "yay")
+    let start = Instant::now();
+
+    let stat = validator::find(4, "yay");
+
+    let elapsed = start.elapsed();
+    println!("Elapsed: {:?}", elapsed);
+    println!("{:?}", stat)
 }
 
 

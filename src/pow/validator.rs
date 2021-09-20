@@ -14,7 +14,7 @@ pub fn is_valid(difficulty: usize, hash: &String) -> bool {
     accepted
 }
 
-pub fn find(difficulty: usize, tx_prefix: &str) {
+pub fn find(difficulty: usize, tx_prefix: &str) -> PowStat {
     let mut counter = 0;
 
     let mut hash;
@@ -22,7 +22,7 @@ pub fn find(difficulty: usize, tx_prefix: &str) {
 
     loop {
         //if counter % 100_000 == 0 {
-            //println!("iteration: {}", counter)
+        //println!("iteration: {}", counter)
         //}
 
         counter = counter + 1;
@@ -41,5 +41,12 @@ pub fn find(difficulty: usize, tx_prefix: &str) {
         }
     }
 
+    return PowStat { counter, hash: hash_str };
     //println!("counter: {}, hash: {}", counter, hash_str);
+}
+
+#[derive(Debug)]
+pub struct PowStat {
+    counter: usize,
+    hash: String,
 }
