@@ -1,5 +1,5 @@
 [package]
-name = "level-coin"
+name = "level_coin"
 version = "0.1.0"
 edition = "2018"
 
@@ -8,3 +8,8 @@ edition = "2018"
 [dependencies]
 hex = "0.4"
 openssl = { version = "0.10"}
+criterion = "0.3"
+
+[[bench]]
+name = "pow_bench"
+harness = false
