@@ -3,7 +3,7 @@ use openssl::sha::sha256;
 pub fn is_valid(difficulty: usize, hash: &String) -> bool {
     let mut chars = hash.chars();
     let mut accepted = true;
-    for i in 0..difficulty {
+    for _i in 0..difficulty {
         let curr_letter = chars.next().unwrap();
 
         if curr_letter != '0' {
