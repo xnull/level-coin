@@ -1,3 +1,6 @@
+
+pub mod pow;
+
 #[cfg(test)]
 mod tests {
     #[test]
