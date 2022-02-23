@@ -2,5 +2,8 @@
 
 members = [
     "metaelon-web-server",
-    "metaelon-crypto"
+    "metaelon-crypto",
+    "metaelon-messenger",
+    "metaelon-fusion",
+    "metaelon-sdk",
 ]

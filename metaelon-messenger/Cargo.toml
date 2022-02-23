@@ -1,0 +1,11 @@
+[package]
+name = "metaelon-messenger"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+signal-crypto = { git = "https://github.com/signalapp/libsignal-client" }
+libsignal-protocol = { git = "https://github.com/signalapp/libsignal-client" }
+#zkgroup = { git = "https://github.com/signalapp/libsignal-client" }

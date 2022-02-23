@@ -2,12 +2,11 @@ use std::borrow::{Borrow, BorrowMut};
 use std::collections::HashMap;
 
 use shamirsecretsharing as sss;
-
-use crate::data_block::DataBlock;
-use crate::secret_block::SecretBlock;
+use crate::secret_sharing::data_block::DataBlock;
+use crate::secret_sharing::secret_block::SecretBlock;
 
 #[derive(Clone, Copy, Debug)]
-struct SharedSecretConfig {
+pub struct SharedSecretConfig {
     count: u8,
     threshold: u8,
 }
@@ -19,16 +18,16 @@ pub struct Secret {
 }
 
 #[derive(Debug)]
-struct SharedSecret {
+pub struct SharedSecret {
     config: SharedSecretConfig,
     secrets: Vec<Secret>,
 }
 
-struct SecretMessage {
+pub struct SecretMessage {
     secret: String,
 }
 
-struct SharedSecretDecoder;
+pub struct SharedSecretDecoder;
 
 impl SharedSecretDecoder {
     fn restore(shared_secret: SharedSecret) -> SecretMessage {
@@ -55,6 +54,7 @@ impl SharedSecretDecoder {
     }
 }
 
+/// https://mitxela.com/projects/shamirs_password_store
 impl SharedSecret {
     fn new(config: SharedSecretConfig, secret_message: SecretMessage) -> Self {
         let mut secrets: Vec<Secret> = vec![];
@@ -99,9 +99,11 @@ impl SharedSecret {
 #[cfg(test)]
 mod test {
     use std::borrow::Borrow;
+    use crate::secret_sharing::data_block::DataBlock;
+    use crate::secret_sharing::shared_secret::{
+        SecretMessage, SharedSecret, SharedSecretConfig, SharedSecretDecoder
+    };
 
-    use crate::data_block::DataBlock;
-    use crate::shared_secret::{SecretMessage, SharedSecret, SharedSecretConfig, SharedSecretDecoder};
 
     #[test]
     fn split_and_restore_secret() {

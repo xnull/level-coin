@@ -1,0 +1,15 @@
+[package]
+name = "metaelon-fusion"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+ed25519-dalek = "1.0.1"
+curve25519-dalek = "3.2.0"
+sha3 = "0.10.1"
+hex-literal = "0.3.4"
+hex = "0.4.3"
+rand_os = "0.2.2"
+metaelon-sdk = { path = "../metaelon-sdk"}

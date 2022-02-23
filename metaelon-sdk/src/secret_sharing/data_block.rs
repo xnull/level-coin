@@ -30,7 +30,7 @@ impl DataBlock {
 
 #[cfg(test)]
 mod test {
-    use crate::data_block::DataBlock;
+    use crate::secret_sharing::data_block::DataBlock;
 
     #[test]
     fn test_to_bytes() {
