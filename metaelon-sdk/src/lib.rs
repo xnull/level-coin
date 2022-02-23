@@ -1,1 +1,1 @@
-mod secret_sharing;
+pub mod secret_sharing;

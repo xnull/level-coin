@@ -1,8 +1,13 @@
 use ed25519_dalek::PublicKey;
+use metaelon_sdk::secret_sharing::shared_secret::{SharedSecret, SharedSecretConfig};
 
-struct SecretMetaData {
-    id: Hash,
+struct SocialSecretConfig {
     units: Vec<PublicKey>,
+}
+
+struct SocialSecret {
+    config: SocialSecretConfig,
+    shared_secret: SharedSecret
 }
 
 const HASH_BYTES: usize = 32;
@@ -15,11 +20,13 @@ mod tests {
     use ed25519_dalek::Keypair;
     use ed25519_dalek::Signature;
     use sha3::{Keccak256, Sha3_256, Shake128ReaderCore};
-    use sha3::digest::core_api::XofReaderCoreWrapper;
+    use metaelon_sdk::secret_sharing::shared_secret::{
+        SecretMessage, SharedSecret, SharedSecretConfig, SharedSecretDecoder
+    };
 
     use rand_os::OsRng;
 
-    use crate::{Hash, SecretMetaData};
+    use crate::{Hash, SocialSecretConfig, SocialSecret};
 
     #[test]
     fn it_works() {
@@ -29,13 +36,28 @@ mod tests {
         let keypair_2: Keypair = Keypair::generate(&mut csprng);
         let keypair_3: Keypair = Keypair::generate(&mut csprng);
 
-        let meta_data = SecretMetaData {
-            id: Hash::default(),
-            units: vec![keypair_1.public, keypair_2.public, keypair_3.public]
+        let config = SharedSecretConfig { count: 5, threshold: 3 };
+
+        let social_secret_config = SocialSecretConfig {
+            units: vec![keypair_1.public, keypair_2.public, keypair_3.public],
         };
 
-        let result = 2 + 2;
-        assert_eq!(result, 4);
+        let mut message = String::from("test");
+        let secret_msg = SecretMessage { secret: message.clone() };
+
+        let mut shared_secret = SharedSecret::new(config, secret_msg);
+
+        let social_secret = SocialSecret {
+            config: social_secret_config,
+            shared_secret
+        };
+
+        //check public keys to restore a secret
+        // implement communication protocol here???
+
+        let secret_message = SharedSecretDecoder::restore(social_secret.shared_secret);
+        assert_eq!(message, secret_message.secret.clone());
+        println!("message: {:?}", secret_message.secret)
     }
 
     #[test]

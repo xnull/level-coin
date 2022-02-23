@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 shamirsecretsharing = "0.1.5"
+

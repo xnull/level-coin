@@ -1,3 +1,3 @@
-mod secret_block;
-mod shared_secret;
-mod data_block;
+pub mod secret_block;
+pub mod shared_secret;
+pub mod data_block;
